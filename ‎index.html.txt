@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>البيانات المالية</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    background:#061f12;
+    color:#fff;
+    font-family:Tahoma,Arial,sans-serif;
+    padding:22px 12px 30px;
+}
+
+.container{
+    width:100%;
+    max-width:620px;
+    margin:auto;
+}
+
+/* العنوان */
+
+.header{
+    text-align:center;
+    margin-bottom:14px;
+}
+
+.header h1{
+    font-size:40px;
+    font-weight:900;
+    line-height:1.1;
+}
+
+.header p{
+    color:#65d978;
+    font-size:20px;
+    font-weight:bold;
+    margin-top:6px;
+}
+
+/* الحالة */
+
+.status-wrap{
+    display:flex;
+    justify-content:center;
+    margin-bottom:15px;
+}
+
+.status{
+    display:block;
+    width:max-content;
+    max-width:100%;
+    min-width:170px;
+    padding:9px 20px;
+    border:2px solid #e2b82e;
+    border-radius:50px;
+    background:#263617;
+    color:#e8c33d;
+    text-align:center;
+    font-size:15px;
+    font-weight:bold;
+    outline:none;
+    font-family:inherit;
+}
+
+/* المربعين */
+
+.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:11px;
+    margin-bottom:13px;
+}
+
+.card{
+    min-height:170px;
+    border:2px solid #328d4c;
+    border-radius:21px;
+    background:#061f12;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:12px 8px;
+}
+
+.card-title{
+    min-height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:19px;
+    font-weight:900;
+    line-height:1.35;
+}
+
+.card-value{
+    width:100%;
+    margin-top:6px;
+    background:transparent;
+    border:0;
+    outline:none;
+    color:#69df83;
+    text-align:center;
+    font-size:39px;
+    font-weight:900;
+    direction:ltr;
+}
+
+.currency{
+    color:#69df83;
+    font-size:16px;
+    margin-top:2px;
+}
+
+/* بيانات المشترك */
+
+.info-box{
+    border:2px solid #328d4c;
+    border-radius:21px;
+    padding:4px 18px;
+    background:#061f12;
+}
+
+.row{
+    min-height:57px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    border-bottom:1px solid #205c34;
+}
+
+.row:last-child{
+    border-bottom:none;
+}
+
+.label{
+    font-size:16px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.value{
+    width:57%;
+    border:0;
+    outline:none;
+    background:transparent;
+    color:#fff;
+    font-family:inherit;
+    font-size:16px;
+    font-weight:bold;
+    text-align:left;
+}
+
+/* الجملة */
+
+.notice{
+    margin:11px 5px;
+    text-align:center;
+}
+
+.notice input{
+    width:100%;
+    border:0;
+    outline:none;
+    background:transparent;
+    color:#9bd33d;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:bold;
+    text-align:center;
+}
+
+/* زر سحب الأرباح */
+
+.withdraw{
+    width:100%;
+    height:58px;
+    border:0;
+    border-radius:17px;
+    background:#4caf50;
+    color:white;
+    font-family:inherit;
+    font-size:22px;
+    font-weight:900;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+
+    cursor:pointer;
+}
+
+/* القفل الصغير */
+
+.lock{
+    width:18px;
+    height:20px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.lock svg{
+    width:18px;
+    height:20px;
+    display:block;
+}
+
+/* الدعم */
+
+.support{
+    width:100%;
+    height:55px;
+    margin-top:10px;
+    border:2px solid #4bc363;
+    border-radius:17px;
+    background:transparent;
+    color:#55ce6d;
+    font-family:inherit;
+    font-size:20px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+/* رسالة الحفظ */
+
+.saved{
+    margin-top:7px;
+    text-align:center;
+    color:#69df83;
+    font-size:12px;
+    opacity:0;
+    transition:.2s;
+}
+
+.saved.show{
+    opacity:1;
+}
+
+/* الموبايل */
+
+@media(max-width:390px){
+
+    body{
+        padding:16px 10px 22px;
+    }
+
+    .header h1{
+        font-size:35px;
+    }
+
+    .header p{
+        font-size:18px;
+    }
+
+    .status{
+        font-size:13px;
+        padding:8px 15px;
+    }
+
+    .cards{
+        gap:8px;
+    }
+
+    .card{
+        min-height:150px;
+        border-radius:17px;
+    }
+
+    .card-title{
+        font-size:16px;
+    }
+
+    .card-value{
+        font-size:33px;
+    }
+
+    .currency{
+        font-size:14px;
+    }
+
+    .info-box{
+        border-radius:17px;
+        padding:3px 12px;
+    }
+
+    .row{
+        min-height:48px;
+    }
+
+    .label,
+    .value{
+        font-size:13px;
+    }
+
+    .notice input{
+        font-size:11px;
+    }
+
+    .withdraw{
+        height:51px;
+        font-size:19px;
+        gap:8px;
+    }
+
+    .lock{
+        width:16px;
+        height:18px;
+    }
+
+    .lock svg{
+        width:16px;
+        height:18px;
+    }
+
+    .support{
+        height:50px;
+        font-size:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>البيانات المالية</h1>
+        <p>بيانات المشترك</p>
+    </div>
+
+    <!-- حالة الحساب قابلة للتعديل -->
+
+    <div class="status-wrap">
+
+        <input
+            id="status"
+            class="status"
+            value="حالة الحساب: جاهز للسحب"
+            oninput="autoSizeStatus(); saveData();"
+        >
+
+    </div>
+
+    <!-- الأرباح والرسوم -->
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-title">
+                الأرباح
+            </div>
+
+            <input
+                id="profits"
+                class="card-value"
+                value="5000"
+                inputmode="decimal"
+                oninput="saveData()"
+            >
+
+            <div class="currency">
+                ج.م
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                الرسوم المستحقة<br>
+                للشركة
+            </div>
+
+            <input
+                id="fees"
+                class="card-value"
+                value="0"
+                inputmode="decimal"
+                oninput="saveData()"
+            >
+
+            <div class="currency">
+                ج.م
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- بيانات المشترك -->
+
+    <div class="info-box">
+
+        <div class="row">
+
+            <span class="label">
+                اسم المشترك :
+            </span>
+
+            <input
+                id="name"
+                class="value"
+                value="محمود حسين احمد"
+                oninput="saveData()"
+            >
+
+        </div>
+
+
+        <div class="row">
+
+            <span class="label">
+                رقم الاستلام :
+            </span>
+
+            <input
+                id="receipt"
+                class="value"
+                value="0112882370"
+                inputmode="numeric"
+                dir="ltr"
+                oninput="saveData()"
+            >
+
+        </div>
+
+
+        <div class="row">
+
+            <span class="label">
+                نسبة الرسوم المستحقة :
+            </span>
+
+            <input
+                id="percentage"
+                class="value"
+                value="3%"
+                inputmode="decimal"
+                dir="ltr"
+                oninput="saveData()"
+            >
+
+        </div>
+
+    </div>
+
+    <!-- الجملة قابلة للتعديل -->
+
+    <div class="notice">
+
+        <input
+            id="notice"
+            value="يتم تنفيذ عمليات السحب وفقًا لحالة الحساب والشروط المعتمدة."
+            oninput="saveData()"
+        >
+
+    </div>
+
+    <!-- زر سحب الأرباح -->
+
+    <button
+        class="withdraw"
+        onclick="withdraw()"
+    >
+
+        <span>
+            سحب الأرباح
+        </span>
+
+        <!-- القفل -->
+
+        <span class="lock">
+
+            <svg
+                viewBox="0 0 24 26"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+
+                <!-- حلقة القفل -->
+
+                <path
+                    d="M6.5 11V7.5C6.5 3.9 9.1 1.5 12 1.5C14.9 1.5 17.5 3.9 17.5 7.5V11"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                />
+
+                <!-- جسم القفل -->
+
+                <rect
+                    x="3"
+                    y="9"
+                    width="18"
+                    height="15"
+                    rx="3"
+                    fill="white"
+                />
+
+                <!-- فتحة المفتاح -->
+
+                <circle
+                    cx="12"
+                    cy="15"
+                    r="2"
+                    fill="#4caf50"
+                />
+
+                <rect
+                    x="10.8"
+                    y="15"
+                    width="2.4"
+                    height="5"
+                    rx="1.2"
+                    fill="#4caf50"
+                />
+
+            </svg>
+
+        </span>
+
+    </button>
+
+    <!-- الدعم -->
+
+    <button
+        class="support"
+        onclick="support()"
+    >
+        التواصل مع الدعم الفني
+    </button>
+
+    <div
+        id="saved"
+        class="saved"
+    >
+        تم حفظ التعديل
+    </div>
+
+</div>
+
+
+<script>
+
+const fields = [
+    "status",
+    "profits",
+    "fees",
+    "name",
+    "receipt",
+    "percentage",
+    "notice"
+];
+
+/* تحميل البيانات */
+
+function loadData(){
+
+    fields.forEach(function(id){
+
+        const saved =
+            localStorage.getItem(
+                "finance_" + id
+            );
+
+        if(saved !== null){
+
+            document.getElementById(id).value =
+                saved;
+
+        }
+
+    });
+
+    autoSizeStatus();
+}
+
+
+/* حفظ البيانات */
+
+function saveData(){
+
+    fields.forEach(function(id){
+
+        const element =
+            document.getElementById(id);
+
+        localStorage.setItem(
+            "finance_" + id,
+            element.value
+        );
+
+    });
+
+    const saved =
+        document.getElementById("saved");
+
+    saved.classList.add("show");
+
+    clearTimeout(window.saveTimer);
+
+    window.saveTimer =
+        setTimeout(function(){
+
+            saved.classList.remove("show");
+
+        },1000);
+}
+
+
+/* تكبير دائرة حالة الحساب */
+
+function autoSizeStatus(){
+
+    const input =
+        document.getElementById("status");
+
+    const temp =
+        document.createElement("span");
+
+    temp.style.position = "absolute";
+    temp.style.visibility = "hidden";
+    temp.style.whiteSpace = "pre";
+    temp.style.font =
+        getComputedStyle(input).font;
+
+    temp.textContent =
+        input.value || "حالة الحساب";
+
+    document.body.appendChild(temp);
+
+    const width =
+        temp.getBoundingClientRect().width + 45;
+
+    document.body.removeChild(temp);
+
+    const maxWidth =
+        window.innerWidth - 30;
+
+    input.style.width =
+        Math.min(
+            Math.max(170, width),
+            maxWidth
+        ) + "px";
+}
+
+
+/* زر السحب */
+
+function withdraw(){
+
+    alert(
+        "يمكنك ربط زر السحب بنظام السحب الفعلي الخاص بك."
+    );
+
+}
+
+
+/* الدعم */
+
+function support(){
+
+    alert(
+        "أضف هنا رابط أو وسيلة التواصل مع الدعم الفني."
+    );
+
+}
+
+
+/* تشغيل الموقع */
+
+loadData();
+
+window.addEventListener(
+    "resize",
+    autoSizeStatus
+);
+
+</script>
+
+</body>
+</html>
